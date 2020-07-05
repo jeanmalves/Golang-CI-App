@@ -1,0 +1,6 @@
+steps:
+
+  - id: "Rodando teste add_test"
+    name: "gcr.io/cloud-builders/go"
+    args: ["test", "github.com/jeanmalves/operation/addition"]
+    env: ["GOPATH=."]
