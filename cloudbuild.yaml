@@ -1,5 +1,5 @@
 substitutions:
-  VERSION: 0.1.0
+  _APP_VERSION: 0.1.0
 
 steps:
 - id: "Rodando teste add_test"
@@ -12,11 +12,11 @@ steps:
   args:
     - 'build'
     - '--build-arg'
-    - 'version=${VERSION}'
+    - 'version=${_APP_VERSION}'
     - '-t'
     - 'gcr.io/$PROJECT_ID/golang-ci-app:latest'
     - '-t'
-    - 'gcr.io/$PROJECT_ID/golang-ci-app:${VERSION}'
+    - 'gcr.io/$PROJECT_ID/golang-ci-app:${_APP_VERSION}'
     - '.'
 
 - name: 'gcr.io/$PROJECT_ID/golang-ci-app'
@@ -24,4 +24,4 @@ steps:
 
 images:
   - 'gcr.io/$PROJECT_ID/golang-ci-app:latest'
-  - 'gcr.io/$PROJECT_ID/golang-ci-app:${VERSION}'
+  - 'gcr.io/$PROJECT_ID/golang-ci-app:${_APP_VERSION}'
