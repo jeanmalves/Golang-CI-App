@@ -1,6 +1,27 @@
-steps:
+substitutions:
+  VERSION: 0.1.0
 
-  - id: "Rodando teste add_test"
-    name: "gcr.io/cloud-builders/go"
-    args: ["test", "github.com/jeanmalves/operation/addition"]
-    env: ["GOPATH=."]
+steps:
+- id: "Rodando teste add_test"
+  name: "gcr.io/cloud-builders/go"
+  args: ["test", "github.com/jeanmalves/operation/addition"]
+  env: ["GOPATH=."]
+
+- id: "Gerando imagem"
+  name: 'gcr.io/cloud-builders/docker'
+  args:
+    - 'build'
+    - '--build-arg'
+    - 'version=${VERSION}'
+    - '-t'
+    - 'gcr.io/$PROJECT_ID/golang-ci-app:latest'
+    - '-t'
+    - 'gcr.io/$PROJECT_ID/golang-ci-app:${VERSION}'
+    - '.'
+
+- name: 'gcr.io/$PROJECT_ID/golang-ci-app'
+  args: ['version']
+
+images:
+  - 'gcr.io/$PROJECT_ID/golang-ci-app:latest'
+  - 'gcr.io/$PROJECT_ID/golang-ci-app:${VERSION}'
