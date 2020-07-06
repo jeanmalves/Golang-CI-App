@@ -19,9 +19,6 @@ steps:
     - 'gcr.io/$PROJECT_ID/golang-ci-app:${_APP_VERSION}'
     - '.'
 
-- name: 'gcr.io/$PROJECT_ID/golang-ci-app'
-  args: ['version']
-
 images:
   - 'gcr.io/$PROJECT_ID/golang-ci-app:latest'
   - 'gcr.io/$PROJECT_ID/golang-ci-app:${_APP_VERSION}'
